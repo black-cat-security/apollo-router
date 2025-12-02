@@ -1,23 +1,24 @@
 services:
   router:
     container_name: apollo_router
-    image: ghcr.io/apollographql/router:v2.9.0 # Используем свежую версию
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: my-custom-router:v2.9.0
     ports:
       - "80:4000"
     volumes:
-      - ./supergraph.graphql:/dist/schema/supergraph.graphql
-      - ./router.yaml:/dist/config/router.yaml
-    # ДОБАВИЛИ "--dev" В КОНЕЦ СПИСКА:
-    command: 
-      - "--config" 
-      - "/dist/config/router.yaml" 
-      - "--supergraph" 
-      - "/dist/schema/supergraph.graphql"
-      - "--dev" 
+      - ./:/app
+    working_dir: /app
+    entrypoint: ""
+    command:
+      - "/bin/sh"
+      - "-c"
+      - |
+        APOLLO_ELV2_LICENSE=accept rover supergraph compose --config ./subgraphs.yaml > supergraph.graphql && \
+        /dist/router --config /dist/config/router.yaml --supergraph supergraph.graphql --dev
     networks:
       - federation_net
-    deploy:
-      replicas: 1 # Для локалки хватит 1
 
 networks:
   federation_net:
