@@ -1,0 +1,15 @@
+# router.yaml
+
+supergraph:
+  listen: 0.0.0.0:4000
+
+cors:
+  allow_any_origin: true
+
+# Включаем визуальный интерфейс
+sandbox:
+  enabled: true
+
+# Включаем домашнюю страницу, которая перенаправит в песочницу
+homepage:
+  enabled: false
