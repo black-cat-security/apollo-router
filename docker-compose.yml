@@ -12,11 +12,13 @@ services:
     working_dir: /app
     entrypoint: ""
     command:
-      - "/bin/sh"
-      - "-c"
-      - |
-        APOLLO_ELV2_LICENSE=accept rover supergraph compose --config ./subgraphs.yaml > supergraph.graphql && \
-        /dist/router --config /dist/config/router.yaml --supergraph supergraph.graphql --dev
+          - "/bin/sh"
+          - "-c"
+          - |
+            # Генерируем граф
+            APOLLO_ELV2_LICENSE=accept rover supergraph compose --config ./subgraphs.yaml > supergraph.graphql && \
+            # Запускаем роутер с ВАШИМ конфигом (/app/router.yaml)
+            /dist/router --config /app/router.yaml --supergraph supergraph.graphql --dev
     networks:
       - federation_net
 

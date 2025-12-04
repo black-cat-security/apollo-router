@@ -11,4 +11,11 @@ sandbox:
 
 # Включаем домашнюю страницу, которая перенаправит в песочницу
 homepage:
+  enabled: true
+
+health_check:
   enabled: false
+
+# Или более детально для каждого подграфа, если версия роутера требует:
+include_subgraph_errors:
+  all: true
