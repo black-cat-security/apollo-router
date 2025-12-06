@@ -1,10 +1,2 @@
 # subgraphs.yaml
 subgraphs:
-  auth:
-    routing_url: "http://auth_app/query"
-    schema:
-      subgraph_url: "http://auth_app:8080/query"
-  # load_app:
-  #   routing_url: "http://load_app:8081/query"
-  #   schema:
-  #     subgraph_url: "http://load_app:8081/query"
